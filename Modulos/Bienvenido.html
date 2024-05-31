@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <style>
+        :root {
+            --primario: #9C27B0;
+            --primarioOscuro: #89119D;
+            --secundario: #FFCE00;
+            --secundarioOscuro: rgb(233, 187, 2);
+            --blanco: #FFF;
+            --negro: #000;
+            --fuente: 'Staatliches', cursive;
+        }
+
+        body {
+            font-family: var(--fuente);
+            background-color: var(--blanco);
+            color: var(--negro);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primario);
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: var(--primario);
+            color: var(--blanco);
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primarioOscuro);
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenido</h1>
+    <p>¡Gracias por iniciar sesión!</p>
+    <button onclick="window.location.href = '../index.php';">Continuar</button>
+</body>
+</html>
