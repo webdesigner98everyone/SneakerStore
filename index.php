@@ -331,6 +331,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <script src="Js/Terminos.js"></script>
     <script src="Js/Sesion.js"></script>
     <script src="Js/chat.js"></script>
+    <script src="Js/menu.js"></script>
 </body>
 <!-- Terminos y Condiciones -->
 <div class="terminos-y-condiciones">
