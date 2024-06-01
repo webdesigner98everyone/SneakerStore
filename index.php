@@ -1,3 +1,18 @@
+<?php
+session_start();
+require_once 'Modulos/In/db_connection.php'; // Asegúrate de que la ruta sea correcta
+
+// Verificar si la sesión está iniciada
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    $usuario = $_SESSION['usuario'];
+    $nombre_usuario = '<a class="navegacion__enlace navegacion__enlace--activo" href="#">' . $usuario . '</a>'; // Nombre de usuario con los mismos estilos que las otras opciones del menú
+    $cerrar_sesion = '<a class="navegacion__enlace" href="Modulos/In/logout.php">Cerrar Sesión</a>'; // Enlace para cerrar sesión
+} else {
+    $nombre_usuario = '<a class="navegacion__enlace navegacion__enlace--activo" href="#" onclick="abrirLogin()">Iniciar Sesión</a>'; // Enlace para iniciar sesión
+    $cerrar_sesion = ''; // No mostrar enlace para cerrar sesión si no hay sesión iniciada
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,14 +40,13 @@
     
     <!-- navegacion -->
     <nav class="navegacion">
-        <!-- navegacion__enlace--activo modificador esto lo que hace es cuando entremos al sitio tienda
-        el titulo quede activo en amarillo -->
         <a class="navegacion__enlace" href="index.php">Portafolio</a>
-        <a class="navegacion__enlace navegacion__enlace--activo" href="Modulos/nosotros.php">Quiénes Somos</a>
-        <a class="navegacion__enlace navegacion__enlace--activo" href="Modulos/Contactanos.php">Contactanos</a>
-        <a class="navegacion__enlace navegacion__enlace--activo" href="#" onclick="abrirLogin()">Iniciar Sesión</a>
-        <a class="navegacion__enlace navegacion__enlace--carrito" href="#"> <!-- Nuevo enlace para el carrito -->
-            <img src="img/Iconos/carrito.png" alt="Carrito de compras"> <!-- Ícono de carrito -->
+            <a class="navegacion__enlace navegacion__enlace--activo" href="Modulos/nosotros.php">Quiénes Somos</a>
+            <a class="navegacion__enlace navegacion__enlace--activo" href="Modulos/Contactanos.php">Contactanos</a>
+            <a class="navegacion__nombre-usuario"><?php echo $nombre_usuario; ?></a>
+            <?php echo $cerrar_sesion; ?>
+            <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
+                <img src="img/Iconos/carrito.png" alt="Carrito de compras">
         </a>
     </nav>
 
