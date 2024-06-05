@@ -45,9 +45,12 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             <a class="navegacion__enlace navegacion__enlace--activo" href="Modulos/Contactanos.php">Contactanos</a>
             <a class="navegacion__nombre-usuario"><?php echo $nombre_usuario; ?></a>
             <?php echo $cerrar_sesion; ?>
+            <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
+                <a class="navegacion__enlace" href="Modulos/perfil.php">Mi Perfil</a>
+            <?php } ?>
             <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
                 <img src="img/Iconos/carrito.png" alt="Carrito de compras">
-        </a>
+            </a>
     </nav>
 
      <!-- Formulario de Login -->
@@ -331,7 +334,6 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <script src="Js/Terminos.js"></script>
     <script src="Js/Sesion.js"></script>
     <script src="Js/chat.js"></script>
-    <script src="Js/menu.js"></script>
 </body>
 <!-- Terminos y Condiciones -->
 <div class="terminos-y-condiciones">

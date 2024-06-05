@@ -1327,3 +1327,43 @@ h3 {
           width: 90%;
       }
     }
+
+    /* Estilos para el submenu */
+    .submenu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      display: none;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+
+    .submenu a {
+      display: block;
+      padding: 10px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .navegacion__usuario:hover .submenu {
+      display: block;
+    }
+
+    /* Estilos para hacerlo responsivo */
+    @media screen and (max-width: 768px) {
+      .navegacion__usuario {
+          position: relative;
+      }
+
+      .submenu {
+          position: static;
+          display: block;
+          width: 100%;
+      }
+
+      .submenu a {
+          border-top: 1px solid #ddd;
+      }
+    }
+
