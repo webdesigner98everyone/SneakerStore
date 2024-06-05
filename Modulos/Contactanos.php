@@ -1,3 +1,17 @@
+<?php
+session_start();
+require_once 'In/db_connection.php'; // Asegúrate de que la ruta sea correcta
+
+// Verificar si la sesión está iniciada
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+    $usuario = $_SESSION['usuario'];
+    $nombre_usuario = '<a class="navegacion__enlace navegacion__enlace--activo" href="#">' . $usuario . '</a>'; // Nombre de usuario con los mismos estilos que las otras opciones del menú
+    $cerrar_sesion = '<a class="navegacion__enlace" href="In/logout.php">Cerrar Sesión</a>'; // Enlace para cerrar sesión
+} else {
+    $nombre_usuario = '<a class="navegacion__enlace navegacion__enlace--activo" href="#" onclick="abrirLogin()">Iniciar Sesión</a>'; // Enlace para iniciar sesión
+    $cerrar_sesion = ''; // No mostrar enlace para cerrar sesión si no hay sesión iniciada
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,47 +37,63 @@
     </button>
     </header>
     <!-- navegacion -->
+    <!-- navegacion -->
     <nav class="navegacion">
-      <!-- navegacion__enlace--activo modificador esto lo que hace es cuando entremos al sitio tienda
-      el titulo quede activo en amarillo -->
-      <a class="navegacion__enlace" href="../index.php">Portafolio</a>
-      <a class="navegacion__enlace navegacion__enlace--activo" href="nosotros.php">Quiénes Somos</a>
-      <a class="navegacion__enlace navegacion__enlace--activo" href="Contactanos.php">Contactanos</a>
-      <a class="navegacion__enlace navegacion__enlace--activo" href="#" onclick="abrirLogin()">Iniciar Sesión</a>
-      <a class="navegacion__enlace navegacion__enlace--carrito" href="#"> <!-- Nuevo enlace para el carrito -->
-            <img src="../img/Iconos/carrito.png" alt="Carrito de compras"> <!-- Ícono de carrito -->
-        </a>
-  </nav>
+        <a class="navegacion__enlace" href="../index.php">Portafolio</a>
+            <a class="navegacion__enlace navegacion__enlace--activo" href="nosotros.php">Quiénes Somos</a>
+            <a class="navegacion__enlace navegacion__enlace--activo" href="Contactanos.php">Contactanos</a>
+            <a class="navegacion__nombre-usuario"><?php echo $nombre_usuario; ?></a>
+            <?php echo $cerrar_sesion; ?>
+            <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
+                <a class="navegacion__enlace" href="perfil.php">Mi Perfil</a>
+            <?php } ?>
+            <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
+                <img src="../img/Iconos/carrito.png" alt="Carrito de compras">
+            </a>
+    </nav>
 
-   <!-- Formulario de Login -->
-   <div class="login-container" id="login-container">
-      <div class="modal-content">
-          <span class="close-login" onclick="cerrarLogin()">&times;</span>
-          <?php include 'Sesion.php'; ?>
-      </div>
-  </div>
+     <!-- Formulario de Login -->
+     <div class="login-container" id="login-container">
+        <div class="modal-content">
+            <span class="close-login" onclick="cerrarLogin()">&times;</span>
+            <?php include 'Sesion.php'; ?>
+        </div>
+    </div>
 
-  <!-- Formulario de Registro -->
-  <div class="login-container" id="registro-container">
-      <div class="modal-content">
-          <span class="close-login" onclick="cerrarRegistro()">&times;</span>
-          <?php include 'Registrarme.php'; ?>
-      </div>
-  </div>
+    <!-- Formulario de Registro -->
+    <div class="login-container" id="registro-container">
+        <div class="modal-content">
+            <span class="close-login" onclick="cerrarRegistro()">&times;</span>
+            <?php include 'Registrarme.php'; ?>
+        </div>
+    </div>
 
-  <!-- Formulario de Recuperación de Contraseña -->
-  <div class="login-container" id="olvide-container">
-      <div class="modal-content">
-          <span class="close-login" onclick="cerrarOlvide()">&times;</span>
-          <?php include 'Reset_Contrasena.html'; ?>
-      </div>
-  </div>
-
+    <!-- Formulario de Recuperación de Contraseña -->
+    <div class="login-container" id="olvide-container">
+        <div class="modal-content">
+            <span class="close-login" onclick="cerrarOlvide()">&times;</span>
+            <?php include 'Reset_Contrasena.html'; ?>
+        </div>
+    </div>
+    
     <!-- Botones flotantes -->
     <div class="botones-flotantes">
         <button class="boton-flotante whatsapp"></button>
         <button class="boton-flotante instagram"></button>
         <button class="boton-flotante facebook"></button>
+    </div>
+
+    <!-- Botón flotante chat-->
+    <div class="boton-flotantechad" id="boton-chat">
+        <img src="../img/Iconos/chat.png" alt="Chat Icon">
+    </div>
+
+    <!-- Contenedor para el chat -->
+    <div id="chat-container" style="display: none;">
+        <div class="modal-content-chad">
+            <span class="close-chad" onclick="cerrarChat()">&times;</span>
+            <?php include 'Modulos/chat.html'; ?>
+        </div>     
     </div>
 
     <div class="contacto-container">
@@ -102,8 +132,9 @@
     <footer class="footer">
         <p class="footer__texto">SneakerStore - Todos los derechos reservados 2024 </p>
     </footer>
-    <!-- Enlaza tu archivo JavaScript aquí -->
+     <!-- Enlaza tu archivo JavaScript aquí -->
     <script src="../Js/script.js"></script>
     <script src="../Js/Sesion.js"></script>
+    <script src="../Js/chat.js"></script>
 </body>
 </html>
