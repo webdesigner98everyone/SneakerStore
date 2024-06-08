@@ -111,7 +111,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                         <p class="producto__nombre">Iva Incluído</p>
                         <!-- Agrega el atributo data-producto-id a cada botón "Añadir al carrito" -->
                         <button class="btn-anadir-carrito" data-producto-id="1">Añadir al carrito</button>
-                        <button class="btn-anadir-carrito" onclick="window.location.href='Modulos/Info_Producto.php'">Ver Producto</button>
+                        <button class="btn-ver" onclick="window.location.href='Modulos/Info_Producto.php'">Ver Producto</button>
                     </div>
                 </a>
             </div>
@@ -336,7 +336,6 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <script src="Js/Sesion.js"></script>
     <script src="Js/chat.js"></script>
     <script src="Js/carrito.js"></script>
-    <script src="Js/mostrar_produc.js"></script>
 </body>
 <!-- Terminos y Condiciones -->
 <div class="terminos-y-condiciones">

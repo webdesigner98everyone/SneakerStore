@@ -1210,6 +1210,20 @@ h3 {
         background-color: var(--secundarioOscuro); /* Color de fondo con opacidad más leve */
     }
 
+    .btn-ver {
+      background-color: var(--secundario);
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.3s ease; /* Agregar transición suave */
+    }
+
+    .btn-ver:hover {
+        background-color: var(--secundarioOscuro); /* Color de fondo con opacidad más leve */
+    }
+
     /* Estilos para el contenedor de login */
     .login-container {
       display: none; /* Ocultar el contenedor por defecto */
