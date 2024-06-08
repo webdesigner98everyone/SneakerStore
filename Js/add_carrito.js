@@ -5,6 +5,8 @@ let carrito = {};
 const botonesAgregarCarrito = document.querySelectorAll('.boton-anadir-carrito');
 botonesAgregarCarrito.forEach(boton => {
     boton.addEventListener('click', () => {
+        if (boton.disabled) return; // Si el botón está deshabilitado, no hacer nada
+        
         const productoId = boton.getAttribute('data-producto-id');
         const productoNombre = boton.parentNode.querySelector('.contenido h2').textContent;
         const productoPrecio = boton.parentNode.querySelector('.contenido .precio').textContent;

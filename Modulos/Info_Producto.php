@@ -6,15 +6,6 @@ require_once 'In/db_connection.php'; // Asegúrate de que la ruta sea correcta
 $sql = "SELECT id_producto, nombre, descripcion, precio, stock, imagen, talla, color, marca FROM productos";
 $result = $conn->query($sql);
 
-// Verificar si la sesión está iniciada
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    $usuario = $_SESSION['usuario'];
-    $nombre_usuario = '<a class="navegacion__enlace navegacion__enlace--activo" href="#">' . $usuario . '</a>'; // Nombre de usuario con los mismos estilos que las otras opciones del menú
-    $cerrar_sesion = '<a class="navegacion__enlace" href="In/logout.php">Cerrar Sesión</a>'; // Enlace para cerrar sesión
-} else {
-    $nombre_usuario = '<a class="navegacion__enlace navegacion__enlace--activo" href="#" onclick="abrirLogin()">Iniciar Sesión</a>'; // Enlace para iniciar sesión
-    $cerrar_sesion = ''; // No mostrar enlace para cerrar sesión si no hay sesión iniciada
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -287,8 +278,11 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                 echo '<div class="circulo" style="background-color: ' . $row["color"] . ';"></div>';
                 echo '</div>';
                 echo '<p>Marca: ' . $row["marca"] . '</p>';
-                echo '<button class="boton-anadir-carrito" data-producto-id="' . $row["id_producto"] . '" data-cantidad="1">Añadir al carrito</button>';
-                echo '</div>'; // Cerramos el div con clase "contenido"
+                if ($row["stock"] > 0) {
+                    echo '<button class="boton-anadir-carrito" data-producto-id="' . $row["id_producto"] . '" data-cantidad="1">Añadir al carrito</button>';
+                } else {
+                    echo '<button class="boton-anadir-carrito" disabled>No disponible</button>';
+                }                echo '</div>'; // Cerramos el div con clase "contenido"
                 echo '</div>'; // Cerramos el div con clase "producto"
             }
             
