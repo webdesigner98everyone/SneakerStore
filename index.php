@@ -95,7 +95,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             <span class="close-chad" onclick="cerrarChat()">&times;</span>
             <?php include 'Modulos/chat.html'; ?>
         </div>     
-    </div>
+    </div> 
 
     <!-- Titulo de productos -->
     <main class="contenedor">
@@ -103,223 +103,224 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <!-- productos -->
         <div class="grid">
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a>
                     <img class="producto__imagen" src="img/Potafolio/NikeForce.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Nike Air Force 1 '07</p>
                         <p class="producto__precio">$314.289</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <!-- Agrega el atributo data-producto-id a cada botón "Añadir al carrito" -->
+                        <button class="btn-anadir-carrito" data-producto-id="1">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" >Ver Producto</button>
                     </div>
-
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a>
                     <img class="producto__imagen" src="img/Potafolio/Frida Black.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Vans Frida Black</p>
                         <p class="producto__precio">$90.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="2">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Adidas Tenis.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Adidas Tenis OwnTheGame</p>
                         <p class="producto__precio">$439.950</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="3">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Converse.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Converse De plataforma alta</p>
                         <p class="producto__precio">$431.840</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="4">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Diesel.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Zapatillas Para Hombre Diesel</p>
                         <p class="producto__precio">$180.900</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="5">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Nivia.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">TENIS NEGRO ULTRA RUNNING NIVIA</p>
                         <p class="producto__precio">$119.900</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="6">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Oliva.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Zapatillas arena Modelo M2530</p>
                         <p class="producto__precio">$132.822</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="7">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Adidas.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">TENIS ADIDAS RESPONSE RUNNER</p>
                         <p class="producto__precio">$200.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="8">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Puma.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Tenis VikkyV3 Negros | PUMA</p>
                         <p class="producto__precio">$389.900</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="9">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/AC.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">TENIS AC CASUAL CABALLERO</p>
                         <p class="producto__precio">$120.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="10">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Lacoste.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Lacoste Clásica Hombre</p>
                         <p class="producto__precio">$170.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="11">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Lacoste Origin.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Lacoste Chaymon 223 1 Cma</p>
                         <p class="producto__precio">$800.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="12">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Jordan.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Air Jordan 1 Mid</p>
                         <p class="producto__precio">$584.194</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="13">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Vergace.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">VERSACE TRIGECA</p>
                         <p class="producto__precio">$1.035.564</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="14">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Balance.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Zapatillas New Balance</p>
                         <p class="producto__precio">$190.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="15">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/diesel-.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Tenis Diesel</p>
                         <p class="producto__precio">$150.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="16">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Newbalance.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">NEW BALANCE 530 BLANCO AZUL GRIS</p>
                         <p class="producto__precio">$250.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="17">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Nike AirZoom.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Nike Air Zoom ACG</p>
                         <p class="producto__precio">$190.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="18">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/PumaCarina.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">Zapatillas Puma Carina 2.0</p>
                         <p class="producto__precio">$90.199</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="19">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
             <div class="producto">
-                <a href="Modulos/producto.html">
+                <a >
                     <img class="producto__imagen" src="img/Potafolio/Dolce.jpg" alt="imagen camisa">
                     <div class="producto__informacion">
                         <p class="producto__nombre">DOLCE GABBANA NEGRO</p>
                         <p class="producto__precio">$225.000</p>
                         <p class="producto__nombre">Iva Incluído</p>
-                        <button class="btn-anadir-carrito">Añadir al carrito</button>
+                        <button class="btn-anadir-carrito" data-producto-id="20">Añadir al carrito</button>
                     </div>
                 </a>
             </div>
@@ -334,6 +335,8 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <script src="Js/Terminos.js"></script>
     <script src="Js/Sesion.js"></script>
     <script src="Js/chat.js"></script>
+    <script src="Js/carrito.js"></script>
+    <script src="Js/mostrar_produc.js"></script>
 </body>
 <!-- Terminos y Condiciones -->
 <div class="terminos-y-condiciones">
