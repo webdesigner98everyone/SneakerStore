@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2024 a las 23:38:54
+-- Tiempo de generación: 08-06-2024 a las 04:33:13
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -89,13 +89,20 @@ CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `descripcion` text DEFAULT NULL,
-  `precio` decimal(10,2) DEFAULT NULL,
+  `precio` decimal(50,3) DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   `imagen` varchar(255) DEFAULT NULL,
   `talla` varchar(10) DEFAULT NULL,
   `color` varchar(20) DEFAULT NULL,
   `marca` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `talla`, `color`, `marca`) VALUES
+(1, 'Nike Air Force 1 \'07', 'El fulgor sigue vivo con las Air Force 1 \'07, un icono del baloncesto que aporta un nuevo toque a sus ya característicos materiales impecables, sus colores llamativos y la cantidad perfecta de brillo para destacar.', 314.289, 20, '../img/Potafolio/NikeForce.jpg', '35, 36, 37', 'Beige', 'Nike ');
 
 -- --------------------------------------------------------
 
@@ -122,7 +129,8 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `correo`, `ciudad`, `direccion`, `codpostal`, `contacto`, `usuario`, `contrasena`) VALUES
 (5, 'Admin', 'admin@hotmail.com', 'cali', 'calle50 101-60', '760046', '3163449117', 'admin@hotmail.com', 'admin'),
 (6, 'luis', 'luisfoguz1198@gmail.com', 'cali', 'cr121a #47a-46, unidad ventura 2, torre Q, Apto 201', '760046', '3163449117', 'luiforgu', 'luiforgu'),
-(7, 'brenda', 'brendaadmin@hotmail.com', 'cali', 'cr121a #47a-46, unidad ventura 2, torre Q, Apto 201', '760046', '3184265820', 'brenloar', '$2y$10$dTs65ojBS78b5mXjic.Xku8FHms7up14KI8R994wBUG2JMbxYebF2');
+(7, 'brenda loaiza', 'brendaadmin@hotmail.com', 'Bogota', 'calle50 101-60', '760046', '3184265821', 'brenloar', '$2y$10$dTs65ojBS78b5mXjic.Xku8FHms7up14KI8R994wBUG2JMbxYebF2'),
+(8, 'Alberto Guzman', 'alberto@hotmail.com', 'Bogota', ' Avenida Calle 26 No 59-51 Edificio. Argos', '110110', '4463194', 'albert', '$2y$10$cF.IP3k6jeaxejKi34bb5uTAVupOw0SowjHUmRD5RPxQbuiBMHTYG');
 
 --
 -- Índices para tablas volcadas
@@ -203,13 +211,13 @@ ALTER TABLE `pedidos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
