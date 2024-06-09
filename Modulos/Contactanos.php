@@ -2,15 +2,21 @@
 session_start();
 require_once 'In/db_connection.php'; // Asegúrate de que la ruta sea correcta
 
-// Verificar si la sesión está iniciada
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    $usuario = $_SESSION['usuario'];
-    $nombre_usuario = '<a class="navegacion__enlace navegacion__enlace--activo" href="#">' . $usuario . '</a>'; // Nombre de usuario con los mismos estilos que las otras opciones del menú
-    $cerrar_sesion = '<a class="navegacion__enlace" href="In/logout.php">Cerrar Sesión</a>'; // Enlace para cerrar sesión
-} else {
-    $nombre_usuario = '<a class="navegacion__enlace navegacion__enlace--activo" href="#" onclick="abrirLogin()">Iniciar Sesión</a>'; // Enlace para iniciar sesión
-    $cerrar_sesion = ''; // No mostrar enlace para cerrar sesión si no hay sesión iniciada
+// Consulta SQL
+$sql = "SELECT * FROM productos"; // Reemplaza esto con tu consulta real
+$result = $conn->query($sql);
+
+// Verificar si la consulta se ejecutó correctamente
+if (!$result) {
+    die("Error en la consulta: " . $conn->error);
 }
+
+// Calcular el total de productos en el carrito
+$carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
+$total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
+    return $total + $producto['cantidad'];
+}, 0);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,44 +45,15 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         </button>
     </header>
     <!-- navegacion -->
-    <!-- navegacion -->
     <nav class="navegacion">
         <a class="navegacion__enlace" href="../index.php">Portafolio</a>
         <a class="navegacion__enlace navegacion__enlace--activo" href="nosotros.php">Quiénes Somos</a>
         <a class="navegacion__enlace navegacion__enlace--activo" href="Contactanos.php">Contactanos</a>
-        <a class="navegacion__nombre-usuario"><?php echo $nombre_usuario; ?></a>
-        <?php echo $cerrar_sesion; ?>
-        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
-            <a class="navegacion__enlace" href="perfil.php">Mi Perfil</a>
-        <?php } ?>
         <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
             <img src="../img/Iconos/carrito.png" alt="Carrito de compras">
+            <span id="contador-carrito"><?php echo $total_productos_carrito; ?></span>
         </a>
     </nav>
-
-    <!-- Formulario de Login -->
-    <div class="login-container" id="login-container">
-        <div class="modal-content">
-            <span class="close-login" onclick="cerrarLogin()">&times;</span>
-            <?php include 'Sesion.php'; ?>
-        </div>
-    </div>
-
-    <!-- Formulario de Registro -->
-    <div class="login-container" id="registro-container">
-        <div class="modal-content">
-            <span class="close-login" onclick="cerrarRegistro()">&times;</span>
-            <?php include 'Registrarme.php'; ?>
-        </div>
-    </div>
-
-    <!-- Formulario de Recuperación de Contraseña -->
-    <div class="login-container" id="olvide-container">
-        <div class="modal-content">
-            <span class="close-login" onclick="cerrarOlvide()">&times;</span>
-            <?php include 'Reset_Contrasena.html'; ?>
-        </div>
-    </div>
 
     <!-- Botones flotantes -->
     <div class="botones-flotantes">
@@ -146,8 +123,8 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     </footer>
     <!-- Enlaza tu archivo JavaScript aquí -->
     <script src="../Js/script.js"></script>
-    <script src="../Js/Sesion.js"></script>
     <script src="../Js/chat.js"></script>
+    <script src="../Js/add_carrito.js"></script>
 </body>
 
 </html>

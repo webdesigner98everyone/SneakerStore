@@ -1,3 +1,22 @@
+<?php
+session_start();
+require_once 'In/db_connection.php'; // Asegúrate de que la ruta sea correcta
+
+// Consulta SQL
+$sql = "SELECT * FROM productos"; // Reemplaza esto con tu consulta real
+$result = $conn->query($sql);
+
+// Verificar si la consulta se ejecutó correctamente
+if (!$result) {
+    die("Error en la consulta: " . $conn->error);
+}
+
+// Calcular el total de productos en el carrito
+$carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
+$total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
+    return $total + $producto['cantidad'];
+}, 0);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,40 +45,14 @@
     </header>
     <!-- navegacion -->
     <nav class="navegacion">
-        <!-- navegacion__enlace--activo modificador esto lo que hace es cuando entremos al sitio tienda
-        el titulo quede activo en amarillo -->
         <a class="navegacion__enlace" href="../index.php">Portafolio</a>
         <a class="navegacion__enlace navegacion__enlace--activo" href="nosotros.php">Quiénes Somos</a>
         <a class="navegacion__enlace navegacion__enlace--activo" href="Contactanos.php">Contactanos</a>
-        <a class="navegacion__enlace navegacion__enlace--activo" href="#" onclick="abrirLogin()">Iniciar Sesión</a>
-        <a class="navegacion__enlace navegacion__enlace--carrito" href="#"> <!-- Nuevo enlace para el carrito -->
-            <img src="../img/Iconos/carrito.png" alt="Carrito de compras"> <!-- Ícono de carrito -->
+        <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
+            <img src="../img/Iconos/carrito.png" alt="Carrito de compras">
+            <span id="contador-carrito"><?php echo $total_productos_carrito; ?></span>
         </a>
     </nav>
-
-    <!-- Formulario de Login -->
-    <div class="login-container" id="login-container">
-        <div class="modal-content">
-            <span class="close-login" onclick="cerrarLogin()">&times;</span>
-            <?php include 'Sesion.php'; ?>
-        </div>
-    </div>
-
-    <!-- Formulario de Registro -->
-    <div class="login-container" id="registro-container">
-        <div class="modal-content">
-            <span class="close-login" onclick="cerrarRegistro()">&times;</span>
-            <?php include 'Registrarme.php'; ?>
-        </div>
-    </div>
-
-    <!-- Formulario de Recuperación de Contraseña -->
-    <div class="login-container" id="olvide-container">
-        <div class="modal-content">
-            <span class="close-login" onclick="cerrarOlvide()">&times;</span>
-            <?php include 'Reset_Contrasena.html'; ?>
-        </div>
-    </div>
 
     <!-- Botones flotantes -->
     <div class="botones-flotantes">
@@ -67,6 +60,20 @@
         <button class="boton-flotante instagram"></button>
         <button class="boton-flotante facebook"></button>
     </div>
+
+    <!-- Botón flotante chat-->
+    <div class="boton-flotantechad" id="boton-chat">
+        <img src="../img/Iconos/chat.png" alt="Chat Icon">
+    </div>
+
+    <!-- Contenedor para el chat -->
+    <div id="chat-container" style="display: none;">
+        <div class="modal-content-chad">
+            <span class="close-chad" onclick="cerrarChat()">&times;</span>
+            <?php include 'chat.html'; ?>
+        </div>
+    </div>
+
 
     <!-- Titulo de productos -->
     <main class="contenedor">
@@ -132,7 +139,8 @@
     </footer>
     <!-- Enlaza tu archivo JavaScript aquí -->
     <script src="../Js/script.js"></script>
-    <script src="../Js/Sesion.js"></script>
+    <script src="../Js/chat.js"></script>
+    <script src="../Js/add_carrito.js"></script>
 </body>
 
 </html>

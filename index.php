@@ -20,6 +20,12 @@ $result = $conn->query($sql);
 if (!$result) {
     die("Error en la consulta: " . $conn->error);
 }
+
+// Calcular el total de productos en el carrito
+$carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
+$total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
+    return $total + $producto['cantidad'];
+}, 0);
 ?>
 
 <!DOCTYPE html>
@@ -61,6 +67,7 @@ if (!$result) {
         <?php } ?>
         <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
             <img src="img/Iconos/carrito.png" alt="Carrito de compras">
+            <span id="contador-carrito"><?php echo $total_productos_carrito; ?></span>
         </a>
     </nav>
 
@@ -192,9 +199,9 @@ if (!$result) {
     <script src="Js/Terminos.js"></script>
     <script src="Js/Sesion.js"></script>
     <script src="Js/chat.js"></script>
-    <script src="Js/carrito.js"></script>
     <script src="Js/busqueda_simple.js"></script>
     <script src="Js/buscar_avanzado.js"></script>
+    <script src="Js/add_carrito.js"></script>
 </body>
 <!-- Terminos y Condiciones -->
 <div class="terminos-y-condiciones">
