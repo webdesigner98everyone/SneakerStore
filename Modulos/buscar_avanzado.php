@@ -6,10 +6,12 @@ $sql = "SELECT * FROM productos WHERE 1";
 
 // Verificar si se enviaron parámetros de búsqueda
 if (!empty($_GET['precio_min'])) {
-    $sql .= " AND precio >= " . $_GET['precio_min'];
+    $precio_min = str_replace(',', '', $_GET['precio_min']); // Eliminar comas
+    $sql .= " AND precio >= " . $precio_min;
 }
 if (!empty($_GET['precio_max'])) {
-    $sql .= " AND precio <= " . $_GET['precio_max'];
+    $precio_max = str_replace(',', '', $_GET['precio_max']); // Eliminar comas
+    $sql .= " AND precio <= " . $precio_max;
 }
 if (!empty($_GET['talla'])) {
     $sql .= " AND talla = '" . $_GET['talla'] . "'";
