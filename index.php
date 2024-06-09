@@ -65,7 +65,7 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
             <a class="navegacion__enlace" href="Modulos/perfil.php">Mi Perfil</a>
         <?php } ?>
-        <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
+        <a id="carrito-link" class="navegacion__enlace navegacion__enlace--carrito" href="#">
             <img src="img/Iconos/carrito.png" alt="Carrito de compras">
             <span id="contador-carrito"><?php echo $total_productos_carrito; ?></span>
         </a>
@@ -149,6 +149,31 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
         <div class="modal-content-chad">
             <span class="close-chad" onclick="cerrarChat()">&times;</span>
             <?php include 'Modulos/chat.html'; ?>
+        </div>
+    </div>
+
+    <!-- Pop-up del carrito -->
+    <div id="carrito-popup" class="carrito-popup" style="display: none;">
+        <div class="carrito-contenido">
+            <span class="carrito-close" onclick="cerrarCarrito()">&times;</span>
+            <h2 class="carrito-titulo">Carrito de Compras</h2>
+            <div class="carrito-tabla-container">
+                <table id="tabla-carrito" class="carrito-tabla">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contenido-carrito">
+                        <!-- Aquí se generará dinámicamente el contenido de la tabla -->
+                    </tbody>
+                </table>
+            </div>
+            <p id="total-carrito" class="carrito-total">Total: $0</p>
+            <button class="carrito-boton-siguiente" onclick="siguientePaso()">Siguiente</button>
         </div>
     </div>
 

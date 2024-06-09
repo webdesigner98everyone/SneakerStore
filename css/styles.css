@@ -1637,3 +1637,68 @@ button[type="submit"]:hover {
   color: var(--blanco);
   margin-top: 20px;
 }
+
+.carrito-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 20px;
+  width: 400px; /* Ajusta el ancho según sea necesario */
+}
+
+.carrito-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #999999;
+}
+
+.carrito-titulo {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.carrito-tabla-container {
+  max-height: 200px; /* Establece la altura máxima de la tabla */
+  overflow-y: auto;
+}
+
+.carrito-tabla {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.carrito-tabla th, .carrito-tabla td {
+  border-bottom: 1px solid #dddddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.carrito-total {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.carrito-boton-siguiente {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.carrito-boton-siguiente:hover {
+  background-color: #0056b3;
+}
