@@ -2,17 +2,34 @@
 session_start();
 require_once 'In/db_connection.php'; // Asegúrate de que la ruta sea correcta
 
-// Consulta SQL para obtener los productos
-$sql = "SELECT id_producto, nombre, descripcion, precio, stock, imagen, talla, color, marca FROM productos";
-$result = $conn->query($sql);
+if(isset($_GET['id_producto'])) {
+    $id_producto = $_GET['id_producto'];
 
+    // Consulta SQL para obtener la información del producto específico
+    $sql = "SELECT id_producto, nombre, descripcion, precio, stock, imagen, talla, color, marca FROM productos WHERE id_producto = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id_producto);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if($result->num_rows > 0) {
+        $producto = $result->fetch_assoc();
+    } else {
+        echo "Producto no encontrado.";
+        exit();
+    }
+} else {
+    echo "ID de producto no proporcionado.";
+    exit();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sneaker Store</title>
+    <title><?php echo $producto['nombre']; ?> - Sneaker Store</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap">
     <style>
         :root {
@@ -51,67 +68,48 @@ $result = $conn->query($sql);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        #productos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 20px;
-        }
-
-        .producto {
+        .producto-detalle {
             background-color: var(--blanco);
             border: 2px solid var(--primarioOscuro);
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            width: calc(50.33% - 20px);
-            max-width: 400px;
-            min-width: 250px;
+            width: calc(100% - 40px);
+            max-width: 800px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 20px;
+            gap: 10px;
         }
 
-        .producto:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .producto img {
+        .producto-detalle img {
             max-width: 100%;
             height: auto;
             border-bottom: 2px solid var(--secundarioOscuro);
         }
 
-        .producto .contenido {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .producto h2 {
+        .producto-detalle h1 {
             color: var(--primarioOscuro);
-            font-size: 1.5em;
-            margin-bottom: 10px;
+            font-size: 2em;
         }
 
-        .producto p {
+        .producto-detalle p {
             margin: 5px 0;
         }
 
-        .producto .precio {
+        .producto-detalle .precio {
             color: var(--secundarioOscuro);
             font-weight: bold;
             font-size: 1.2em;
         }
 
-        .producto .stock {
+        .producto-detalle .stock {
             font-size: 0.9em;
             color: var(--primarioOscuro);
         }
 
-        .producto .talla select {
+        .producto-detalle .talla select {
             width: 100%;
             padding: 10px;
             border: 1px solid var(--primarioOscuro);
@@ -121,19 +119,20 @@ $result = $conn->query($sql);
             color: var(--negro);
         }
 
-        .producto .color {
+        .producto-detalle .color {
             display: flex;
             align-items: center;
             gap: 5px;
         }
 
-        .producto .color .circulo {
+        .producto-detalle .color .circulo {
             width: 20px;
             height: 20px;
             border-radius: 50%;
             background-color: var(--negro);
             border: 1px solid var(--primarioOscuro);
         }
+
         .boton-volver {
             text-align: center;
             margin-top: 20px;
@@ -156,52 +155,67 @@ $result = $conn->query($sql);
 
         /* Estilo navegacion */
         .navegacion {
-        background-color: var(--primarioOscuro);
-        padding: 1rem 0;
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        flex-wrap: wrap;
+            background-color: var(--primarioOscuro);
+            padding: 1rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .navegacion__enlace {
-        font-family: var(--fuente);
-        color: var(--blanco);
-        font-size: 2rem;
-        padding: 1rem;
-        text-decoration: none;
-        transition: color 0.3s ease;
+            font-family: var(--fuente);
+            color: var(--blanco);
+            font-size: 2rem;
+            padding: 1rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
-
-        /* Estilo Carrito */
 
         .navegacion__enlace--carrito {
-        margin-right: 20px;
-        background-color: var(--primarioOscuro); /* Color de fondo del contenedor */
-        padding: 8px; /* Ajustar el espacio interno alrededor del ícono */
-        border-radius: 50%; /* Hacer el contenedor circular */
-        width: 50px; /* Ancho del contenedor igual al tamaño de la imagen */
-        height: 50px; /* Altura del contenedor igual al tamaño de la imagen */
-        display: flex;
-        align-items: center;
-        justify-content: center;
+            margin-right: 20px;
+            background-color: var(--primarioOscuro); /* Color de fondo del contenedor */
+            padding: 8px; /* Ajustar el espacio interno alrededor del ícono */
+            border-radius: 50%; /* Hacer el contenedor circular */
+            width: 50px; /* Ancho del contenedor igual al tamaño de la imagen */
+            height: 50px; /* Altura del contenedor igual al tamaño de la imagen */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-
         .navegacion__enlace--carrito img {
-        width: 30px; /* Ajustar el tamaño del ícono del carrito */
-        height: auto;
+            width: 30px; /* Ajustar el tamaño del ícono del carrito */
+            height: auto;
         }
 
         .navegacion__enlace--activo,
         .navegacion__enlace:hover {
-        color: var(--secundario);
+            color: var(--secundario);
         }
 
         .navegacion__enlace--carrito:hover {
-        background-color: var(--primario); /* Cambiar el color de fondo al pasar el mouse */
-        transition: background-color 0.3s ease; /* Agregar una transición suave */
+            background-color: var(--primario); /* Cambiar el color de fondo al pasar el mouse */
+            transition: background-color 0.3s ease; /* Agregar una transición suave */
         }
+
+        /* Estilos para el botón "Añadir al carrito" */
+        .boton-anadir-carrito {
+            background-color: var(--secundario);
+            color: var(--blanco);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .boton-anadir-carrito:hover {
+            background-color: var(--secundarioOscuro);
+        }
+
+        
         /* Estilo Grid */
         .grid {
         display: grid;
@@ -220,77 +234,50 @@ $result = $conn->query($sql);
         .header__logo {
         margin: 0;
         }
-
-        /* Estilos para el botón "Añadir al carrito" */
-        .boton-anadir-carrito {
-            background-color: var(--secundario);
-            color: var(--blanco);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s;
-        }
-
-        .boton-anadir-carrito:hover {
-            background-color: var(--secundarioOscuro);
-        }
     </style>
 </head>
 <body>
     <!-- Encabezado -->
     <header class="header">
-        <a href="../index.html">
+        <a href="../index.php">
             <img class="header__logo" src="../img/Logo/Marca.png" alt="Logotipo">
         </a>
     </header>
     <nav class="navegacion">
-    <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
-        <img src="../img/Iconos/carrito.png" alt="Carrito de compras">
-        <span id="contador-carrito">0</span> <!-- Contador del carrito -->
-    </a>
-</nav>
+        <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
+            <img src="../img/Iconos/carrito.png" alt="Carrito de compras">
+            <span id="contador-carrito">0</span> <!-- Contador del carrito -->
+        </a>
+    </nav>
 
-    <h1>Productos</h1>
-    <div id="productos">
-        <?php
-        if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
-                $tallas = explode(',', $row["talla"]);
-                echo '<div class="producto">';
-                echo '<img src="' . $row["imagen"] . '" alt="' . $row["nombre"] . '">';
-                echo '<div class="contenido">';
-                echo '<h2>' . $row["nombre"] . '</h2>';
-                echo '<p>' . $row["descripcion"] . '</p>';
-                echo '<p class="precio">Precio: $' . $row["precio"] . '</p>';
-                echo '<p class="stock">Stock x Pares: ' . $row["stock"] . ' Unidades Disponibles</p>';
-                echo '<div class="talla">';
-                echo '<select>';
-                echo '<option disabled selected>Seleccione su talla</option>';
+    <div class="producto-detalle" id="productos">
+        <img src="../img/Potafolio/<?php echo $producto['imagen']; ?>" alt="imagen <?php echo $producto['nombre']; ?>">
+        <h1><?php echo $producto['nombre']; ?></h1>
+        <p><?php echo $producto['descripcion']; ?></p>
+        <p class="precio">Precio: $<?php echo number_format($producto['precio'], 3); ?></p>
+        <p class="stock">Stock x Pares: <?php echo $producto['stock']; ?> Unidades Disponibles</p>
+        <div class="talla">
+            <label for="talla">Talla:</label>
+            <select id="talla">
+                <option disabled selected>Seleccione su talla</option>
+                <?php
+                $tallas = explode(',', $producto['talla']);
                 foreach ($tallas as $talla) {
                     echo '<option value="' . trim($talla) . '">' . trim($talla) . '</option>';
                 }
-                echo '</select>';
-                echo '</div>';
-                echo '<div class="color">';
-                echo '<span>Color:</span>';
-                echo '<div class="circulo" style="background-color: ' . $row["color"] . ';"></div>';
-                echo '</div>';
-                echo '<p>Marca: ' . $row["marca"] . '</p>';
-                if ($row["stock"] > 0) {
-                    echo '<button class="boton-anadir-carrito" data-producto-id="' . $row["id_producto"] . '" data-cantidad="1">Añadir al carrito</button>';
-                } else {
-                    echo '<button class="boton-anadir-carrito" disabled>No disponible</button>';
-                }                echo '</div>'; // Cerramos el div con clase "contenido"
-                echo '</div>'; // Cerramos el div con clase "producto"
-            }
-            
-        } else {
-            echo '<p>No hay productos disponibles.</p>';
-        }
-        $conn->close();
-        ?>
+                ?>
+            </select>
+        </div>
+        <div class="color">
+            <span>Color:</span>
+            <div class="circulo" style="background-color: <?php echo $producto['color']; ?>;"></div>
+        </div>
+        <p>Marca: <?php echo $producto['marca']; ?></p>
+        <?php if ($producto['stock'] > 0): ?>
+            <button class="boton-anadir-carrito" data-producto-id="<?php echo $producto['id_producto']; ?>" data-cantidad="1">Añadir al carrito</button>
+        <?php else: ?>
+            <button class="boton-anadir-carrito" disabled>No disponible</button>
+        <?php endif; ?>
     </div>
     <div class="boton-volver">
         <button onclick="window.location.href='../index.php'">Volver</button>

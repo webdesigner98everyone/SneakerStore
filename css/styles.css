@@ -215,15 +215,43 @@ h3 {
 /* Estilo pie */
 .footer {
   background-color: var(--primarioOscuro);
-  padding: 1rem 0;
-  margin-top: 2rem;
+  padding: 2rem 0;
+  color: var(--blanco);
+}
+
+.footer__info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.footer__info-item {
+  width: 45%;
+}
+
+.footer__info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer__info p {
+  margin-bottom: 0.5rem;
+}
+
+.footer__payment-methods img {
+  max-width: 500px; /* Ajustar el ancho máximo de la imagen */
+  height: auto; /* Mantener la proporción de la imagen */
+  margin-right: 20px;
 }
 
 .footer__texto {
   font-family: var(--fuente);
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 1.2rem;
 }
+
+
+
 
 /* Estilo del botón hamburguesa */
 .menu-toggle {

@@ -125,12 +125,22 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
           </form>
         </div>
       </div>
-      
-      
-      
-    <!-- pie -->
     <footer class="footer">
-        <p class="footer__texto">SneakerStore - Todos los derechos reservados 2024 </p>
+        <div class="footer__info">
+            <div class="footer__info-item">
+                <h3>Contacto</h3>
+                <p><strong>Correo:</strong> info@sneakerstore.com</p>
+                <p><strong>Teléfono:</strong> +1 (123) 456-7890</p>
+                <p><strong>Dirección:</strong> Av. Principal #123, Ciudad, País</p>
+            </div>
+            <div class="footer__info-item">
+                <h3>Métodos de Pago</h3>
+                <div class="footer__payment-methods">
+                    <img src="../img/MetodosPago/medios_de_pago.png" alt="Métodos de Pago">
+                </div>
+            </div>
+        </div>
+        <p class="footer__texto">SneakerStore - Todos los derechos reservados 2024</p>
     </footer>
      <!-- Enlaza tu archivo JavaScript aquí -->
     <script src="../Js/script.js"></script>

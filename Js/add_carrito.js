@@ -8,23 +8,6 @@ botonesAgregarCarrito.forEach(boton => {
         if (boton.disabled) return; // Si el botón está deshabilitado, no hacer nada
         
         const productoId = boton.getAttribute('data-producto-id');
-        const productoNombre = boton.parentNode.querySelector('.contenido h2').textContent;
-        const productoPrecio = boton.parentNode.querySelector('.contenido .precio').textContent;
-
-        // Si el producto ya está en el carrito, incrementar la cantidad, de lo contrario, agregarlo al carrito
-        if (carrito.hasOwnProperty(productoId)) {
-            carrito[productoId].cantidad++;
-        } else {
-            carrito[productoId] = {
-                nombre: productoNombre,
-                precio: productoPrecio,
-                cantidad: 1
-            };
-        }
-
-        // Actualizar el contador del carrito
-        actualizarContadorCarrito();
-
         const cantidad = boton.getAttribute('data-cantidad');
 
         // Realizar la solicitud AJAX para actualizar el stock
@@ -43,6 +26,20 @@ botonesAgregarCarrito.forEach(boton => {
                     boton.disabled = true;
                     boton.textContent = 'No disponible';
                 }
+
+                // Si el producto ya está en el carrito, incrementar la cantidad, de lo contrario, agregarlo al carrito
+                if (carrito.hasOwnProperty(productoId)) {
+                    carrito[productoId].cantidad++;
+                } else {
+                    carrito[productoId] = {
+                        nombre: boton.parentNode.querySelector('h1').textContent,
+                        precio: parseFloat(boton.parentNode.querySelector('.precio').textContent.replace('$', '').trim()),
+                        cantidad: 1
+                    };
+                }
+
+                // Actualizar el contador del carrito
+                actualizarContadorCarrito();
             }
         };
         xhr.send('producto_id=' + encodeURIComponent(productoId) + '&cantidad=' + encodeURIComponent(cantidad));
@@ -52,7 +49,7 @@ botonesAgregarCarrito.forEach(boton => {
 
 // Función para actualizar el contador del carrito
 function actualizarContadorCarrito() {
-    let contadorCarrito = document.getElementById('contador-carrito');
-    let cantidadProductos = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
+    const contadorCarrito = document.getElementById('contador-carrito');
+    const cantidadProductos = Object.values(carrito).reduce((total, producto) => total + producto.cantidad, 0);
     contadorCarrito.textContent = cantidadProductos.toString();
 }
