@@ -75,8 +75,8 @@ if (!$result) {
     <!-- Búsqueda Avanzada -->
     <div class="advanced-search-container">
         <form id="advanced-search-form" class="advanced-search-form">
-        <input type="number" name="precio_min" placeholder="Precio mínimo" class="advanced-search-input">
-        <input type="number" name="precio_max" placeholder="Precio máximo" class="advanced-search-input">
+            <input type="number" name="precio_min" placeholder="Precio mínimo" class="advanced-search-input">
+            <input type="number" name="precio_max" placeholder="Precio máximo" class="advanced-search-input">
             <select name="talla" class="advanced-search-select">
                 <option value="">Seleccione una talla</option>
                 <?php
@@ -100,7 +100,7 @@ if (!$result) {
             <button type="submit" class="advanced-search-button" id="advanced-search-button">Buscar</button>
         </form>
     </div>
-    
+
     <!-- Formulario de Login -->
     <div class="login-container" id="login-container">
         <div class="modal-content">

@@ -145,7 +145,7 @@
             }
     ?>
             <div class="container">
-            <h1>Perfil del Usuario: <?php echo $usuario; ?></h1>
+                <h1>Perfil del Usuario: <?php echo $usuario; ?></h1>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                     <label for="id_usuario">ID de Usuario:</label>
                     <input type="text" id="id_usuario" name="id_usuario" value="<?php echo $row['id_usuario']; ?>" readonly required>

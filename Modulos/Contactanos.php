@@ -3,7 +3,7 @@ session_start();
 require_once 'In/db_connection.php'; // Asegúrate de que la ruta sea correcta
 
 // Verificar si la sesión está iniciada
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     $usuario = $_SESSION['usuario'];
     $nombre_usuario = '<a class="navegacion__enlace navegacion__enlace--activo" href="#">' . $usuario . '</a>'; // Nombre de usuario con los mismos estilos que las otras opciones del menú
     $cerrar_sesion = '<a class="navegacion__enlace" href="In/logout.php">Cerrar Sesión</a>'; // Enlace para cerrar sesión
@@ -14,6 +14,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,35 +26,36 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     <link rel="stylesheet" href="../css/styles.css">
     <title>SneakerStore</title>
 </head>
+
 <body>
     <!-- Encabezado -->
     <header class="header">
         <a href="index.html">
             <img class="header__logo" src="../img/Logo/Marca.png" alt="Logotipo">
         </a>
-    <!-- Botón hamburguesa -->
-    <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
-        <span class="menu-icon"></span>
-    </button>
+        <!-- Botón hamburguesa -->
+        <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+            <span class="menu-icon"></span>
+        </button>
     </header>
     <!-- navegacion -->
     <!-- navegacion -->
     <nav class="navegacion">
         <a class="navegacion__enlace" href="../index.php">Portafolio</a>
-            <a class="navegacion__enlace navegacion__enlace--activo" href="nosotros.php">Quiénes Somos</a>
-            <a class="navegacion__enlace navegacion__enlace--activo" href="Contactanos.php">Contactanos</a>
-            <a class="navegacion__nombre-usuario"><?php echo $nombre_usuario; ?></a>
-            <?php echo $cerrar_sesion; ?>
-            <?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
-                <a class="navegacion__enlace" href="perfil.php">Mi Perfil</a>
-            <?php } ?>
-            <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
-                <img src="../img/Iconos/carrito.png" alt="Carrito de compras">
-            </a>
+        <a class="navegacion__enlace navegacion__enlace--activo" href="nosotros.php">Quiénes Somos</a>
+        <a class="navegacion__enlace navegacion__enlace--activo" href="Contactanos.php">Contactanos</a>
+        <a class="navegacion__nombre-usuario"><?php echo $nombre_usuario; ?></a>
+        <?php echo $cerrar_sesion; ?>
+        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
+            <a class="navegacion__enlace" href="perfil.php">Mi Perfil</a>
+        <?php } ?>
+        <a class="navegacion__enlace navegacion__enlace--carrito" href="#">
+            <img src="../img/Iconos/carrito.png" alt="Carrito de compras">
+        </a>
     </nav>
 
-     <!-- Formulario de Login -->
-     <div class="login-container" id="login-container">
+    <!-- Formulario de Login -->
+    <div class="login-container" id="login-container">
         <div class="modal-content">
             <span class="close-login" onclick="cerrarLogin()">&times;</span>
             <?php include 'Sesion.php'; ?>
@@ -75,7 +77,7 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             <?php include 'Reset_Contrasena.html'; ?>
         </div>
     </div>
-    
+
     <!-- Botones flotantes -->
     <div class="botones-flotantes">
         <button class="boton-flotante whatsapp"></button>
@@ -93,38 +95,38 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         <div class="modal-content-chad">
             <span class="close-chad" onclick="cerrarChat()">&times;</span>
             <?php include 'Modulos/chat.html'; ?>
-        </div>     
+        </div>
     </div>
 
     <div class="contacto-container">
         <div class="contacto-info">
-          <h2>Información de Contacto</h2>
-          <ul class="contact-info">
+            <h2>Información de Contacto</h2>
+            <ul class="contact-info">
                 <li>
-                    <img src="../img/Iconos/Contacto.png" alt="Ícono de teléfono"> 
-                    <p>+1234567890</p> 
+                    <img src="../img/Iconos/Contacto.png" alt="Ícono de teléfono">
+                    <p>+1234567890</p>
                 </li>
                 <li>
-                    <img src="../img/Iconos/Correo.png" alt="Ícono de correo electrónico"> 
+                    <img src="../img/Iconos/Correo.png" alt="Ícono de correo electrónico">
                     <p>info@miempresa.com</p>
                 </li>
             </ul>
         </div>
         <div class="contacto-form">
-          <form action="#" method="post">
-            <div class="form-group">
-              <input type="text" id="nombre" name="nombre" placeholder="Nombre Completo" required>
-            </div>
-            <div class="form-group">
-              <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
-            </div>
-            <div class="form-group">
-              <textarea id="mensaje" name="mensaje" rows="10" placeholder="Mensaje" required></textarea>
-            </div>
-            <button type="submit">Enviar</button>
-          </form>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre Completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="mensaje" name="mensaje" rows="10" placeholder="Mensaje" required></textarea>
+                </div>
+                <button type="submit">Enviar</button>
+            </form>
         </div>
-      </div>
+    </div>
     <footer class="footer">
         <div class="footer__info">
             <div class="footer__info-item">
@@ -142,9 +144,10 @@ if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         </div>
         <p class="footer__texto">SneakerStore - Todos los derechos reservados 2024</p>
     </footer>
-     <!-- Enlaza tu archivo JavaScript aquí -->
+    <!-- Enlaza tu archivo JavaScript aquí -->
     <script src="../Js/script.js"></script>
     <script src="../Js/Sesion.js"></script>
     <script src="../Js/chat.js"></script>
 </body>
+
 </html>

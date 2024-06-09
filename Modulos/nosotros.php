@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,16 +12,17 @@
     <link rel="stylesheet" href="../css/styles.css">
     <title>SneakerStore</title>
 </head>
+
 <body>
     <!-- Encabezado -->
     <header class="header">
         <a href="index.html">
             <img class="header__logo" src="../img/Logo/Marca.png" alt="Logotipo">
         </a>
-    <!-- Botón hamburguesa -->
-    <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
-        <span class="menu-icon"></span>
-    </button>
+        <!-- Botón hamburguesa -->
+        <button class="menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
+            <span class="menu-icon"></span>
+        </button>
     </header>
     <!-- navegacion -->
     <nav class="navegacion">
@@ -35,8 +37,8 @@
         </a>
     </nav>
 
-     <!-- Formulario de Login -->
-     <div class="login-container" id="login-container">
+    <!-- Formulario de Login -->
+    <div class="login-container" id="login-container">
         <div class="modal-content">
             <span class="close-login" onclick="cerrarLogin()">&times;</span>
             <?php include 'Sesion.php'; ?>
@@ -65,21 +67,21 @@
         <button class="boton-flotante instagram"></button>
         <button class="boton-flotante facebook"></button>
     </div>
-    
+
     <!-- Titulo de productos -->
     <main class="contenedor">
         <h1>Nosotros</h1>
         <div class="nosotros">
             <div class="nosotros__contenido">
-                <p>En <b>SneakerStore</b>, somos más que una tienda de zapatos deportivos; 
-                    somos una comunidad apasionada por el estilo y el rendimiento. 
-                    Nos dedicamos a ofrecer una experiencia de compra excepcional 
-                    para todos los entusiastas del calzado deportivo, desde los atletas 
+                <p>En <b>SneakerStore</b>, somos más que una tienda de zapatos deportivos;
+                    somos una comunidad apasionada por el estilo y el rendimiento.
+                    Nos dedicamos a ofrecer una experiencia de compra excepcional
+                    para todos los entusiastas del calzado deportivo, desde los atletas
                     más dedicados hasta los amantes de la moda urbana.</p>
 
-                <p>La calidad es nuestra prioridad. Todos nuestros productos son 
-                    cuidadosamente seleccionados y probados para garantizar su durabilidad, confort y 
-                    rendimiento. Nos esforzamos por ofrecer solo productos de la más alta calidad que 
+                <p>La calidad es nuestra prioridad. Todos nuestros productos son
+                    cuidadosamente seleccionados y probados para garantizar su durabilidad, confort y
+                    rendimiento. Nos esforzamos por ofrecer solo productos de la más alta calidad que
                     cumplan con las expectativas de nuestros clientes más exigentes.</p>
             </div>
             <img class="nosotros__imagen" src="../img/Potafolio/nosotros.jpg" alt="imagen nosotros">
@@ -132,4 +134,5 @@
     <script src="../Js/script.js"></script>
     <script src="../Js/Sesion.js"></script>
 </body>
+
 </html>

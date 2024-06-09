@@ -33,4 +33,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['producto_id']) && isse
 }
 
 $conn->close();
-?>

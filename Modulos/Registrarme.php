@@ -33,17 +33,16 @@ require_once 'In/db_connection.php';
         <label for="reg-contacto">Teléfono y/o Celular:</label>
         <input type="text" id="reg-contacto" name="contacto" placeholder="Teléfono y/o Celular" required>
     </div>
-    
+
     <div class="input-group">
         <label for="reg-username">Usuario:</label>
         <input type="text" id="reg-username" name="usuario" placeholder="Usuario" required>
     </div>
-    
+
     <div class="input-group">
         <label for="reg-password">Contraseña:</label>
         <input type="password" id="reg-password" name="contrasena" placeholder="Contraseña" required>
     </div>
-    
+
     <button type="submit" class="btn">Registrarse</button>
 </form>
-

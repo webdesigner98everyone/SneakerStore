@@ -43,4 +43,3 @@ if ($result->num_rows > 0) {
     // Si no se encontraron resultados, mostrar un mensaje
     echo '<p>No se encontraron productos que coincidan con los criterios de búsqueda.</p>';
 }
-?>

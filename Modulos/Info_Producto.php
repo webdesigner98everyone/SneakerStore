@@ -2,7 +2,7 @@
 session_start();
 require_once 'In/db_connection.php'; // Asegúrate de que la ruta sea correcta
 
-if(isset($_GET['id_producto'])) {
+if (isset($_GET['id_producto'])) {
     $id_producto = $_GET['id_producto'];
 
     // Consulta SQL para obtener la información del producto específico
@@ -12,7 +12,7 @@ if(isset($_GET['id_producto'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if($result->num_rows > 0) {
+    if ($result->num_rows > 0) {
         $producto = $result->fetch_assoc();
     } else {
         echo "Producto no encontrado.";
@@ -26,6 +26,7 @@ if(isset($_GET['id_producto'])) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -174,18 +175,24 @@ if(isset($_GET['id_producto'])) {
 
         .navegacion__enlace--carrito {
             margin-right: 20px;
-            background-color: var(--primarioOscuro); /* Color de fondo del contenedor */
-            padding: 8px; /* Ajustar el espacio interno alrededor del ícono */
-            border-radius: 50%; /* Hacer el contenedor circular */
-            width: 50px; /* Ancho del contenedor igual al tamaño de la imagen */
-            height: 50px; /* Altura del contenedor igual al tamaño de la imagen */
+            background-color: var(--primarioOscuro);
+            /* Color de fondo del contenedor */
+            padding: 8px;
+            /* Ajustar el espacio interno alrededor del ícono */
+            border-radius: 50%;
+            /* Hacer el contenedor circular */
+            width: 50px;
+            /* Ancho del contenedor igual al tamaño de la imagen */
+            height: 50px;
+            /* Altura del contenedor igual al tamaño de la imagen */
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .navegacion__enlace--carrito img {
-            width: 30px; /* Ajustar el tamaño del ícono del carrito */
+            width: 30px;
+            /* Ajustar el tamaño del ícono del carrito */
             height: auto;
         }
 
@@ -195,8 +202,10 @@ if(isset($_GET['id_producto'])) {
         }
 
         .navegacion__enlace--carrito:hover {
-            background-color: var(--primario); /* Cambiar el color de fondo al pasar el mouse */
-            transition: background-color 0.3s ease; /* Agregar una transición suave */
+            background-color: var(--primario);
+            /* Cambiar el color de fondo al pasar el mouse */
+            transition: background-color 0.3s ease;
+            /* Agregar una transición suave */
         }
 
         /* Estilos para el botón "Añadir al carrito" */
@@ -215,27 +224,28 @@ if(isset($_GET['id_producto'])) {
             background-color: var(--secundarioOscuro);
         }
 
-        
+
         /* Estilo Grid */
         .grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
         }
 
         /* Estilo header */
         .header {
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-        margin-bottom: 1rem;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
         }
 
         .header__logo {
-        margin: 0;
+            margin: 0;
         }
     </style>
 </head>
+
 <body>
     <!-- Encabezado -->
     <header class="header">
@@ -273,9 +283,9 @@ if(isset($_GET['id_producto'])) {
             <div class="circulo" style="background-color: <?php echo $producto['color']; ?>;"></div>
         </div>
         <p>Marca: <?php echo $producto['marca']; ?></p>
-        <?php if ($producto['stock'] > 0): ?>
+        <?php if ($producto['stock'] > 0) : ?>
             <button class="boton-anadir-carrito" data-producto-id="<?php echo $producto['id_producto']; ?>" data-cantidad="1">Añadir al carrito</button>
-        <?php else: ?>
+        <?php else : ?>
             <button class="boton-anadir-carrito" disabled>No disponible</button>
         <?php endif; ?>
     </div>
@@ -284,4 +294,5 @@ if(isset($_GET['id_producto'])) {
     </div>
     <script src="../Js/add_carrito.js"></script>
 </body>
+
 </html>

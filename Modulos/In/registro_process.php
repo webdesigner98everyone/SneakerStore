@@ -38,4 +38,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: ../index.php");
     exit(); // Detener la ejecución del script después de redireccionar
 }
-?>
