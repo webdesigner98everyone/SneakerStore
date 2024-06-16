@@ -28,6 +28,8 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
 }, 0);
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -65,11 +67,39 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) { ?>
             <a class="navegacion__enlace" href="Modulos/perfil.php">Mi Perfil</a>
         <?php } ?>
+        <!-- Enlace al carrito con el contador -->
         <a id="carrito-link" class="navegacion__enlace navegacion__enlace--carrito" href="#">
             <img src="img/Iconos/carrito.png" alt="Carrito de compras">
             <span id="contador-carrito"><?php echo $total_productos_carrito; ?></span>
         </a>
+
     </nav>
+
+    <div id="carrito-modal" class="modal">
+        <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
+            <h2>Carrito de Compras</h2>
+            <table id="tabla-carrito">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los productos del carrito se agregarán aquí dinámicamente -->
+                </tbody>
+            </table>
+            <div class="total">
+                <strong>Total a pagar: $<span id="total-pagar"></span></strong>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Búsqueda Simple -->
     <div class="search-container">
@@ -152,31 +182,6 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
         </div>
     </div>
 
-    <!-- Pop-up del carrito -->
-    <div id="carrito-popup" class="carrito-popup" style="display: none;">
-        <div class="carrito-contenido">
-            <span class="carrito-close" onclick="cerrarCarrito()">&times;</span>
-            <h2 class="carrito-titulo">Carrito de Compras</h2>
-            <div class="carrito-tabla-container">
-                <table id="tabla-carrito" class="carrito-tabla">
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Precio Unitario</th>
-                            <th>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody id="contenido-carrito">
-                        <!-- Aquí se generará dinámicamente el contenido de la tabla -->
-                    </tbody>
-                </table>
-            </div>
-            <p id="total-carrito" class="carrito-total">Total: $0</p>
-            <button class="carrito-boton-siguiente" onclick="siguientePaso()">Siguiente</button>
-        </div>
-    </div>
-
     <!-- Titulo de productos -->
     <main class="contenedor">
         <h1>Nuestros Productos</h1>
@@ -191,9 +196,9 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
                             <img class="producto__imagen" src="img/Potafolio/<?php echo $row['imagen']; ?>" alt="imagen <?php echo $row['nombre']; ?>">
                             <div class="producto__informacion">
                                 <p class="producto__nombre"><?php echo $row['nombre']; ?></p>
-                                <p class="producto__precio">$<?php echo number_format($row['precio'], 3); ?></p>
+                                <p class="producto__precio">$<?php echo $row['precio']; ?></p>
                                 <p class="producto__nombre">Iva Incluído</p>
-                                <button class="btn-anadir-carrito" data-producto-id="<?php echo $row['id_producto']; ?>">Añadir al carrito</button>
+                                <button class="boton-anadir-carrito" data-producto-id="<?php echo $row['id_producto']; ?>">Añadir al carrito</button>
                             </div>
                         </a>
                     </div>
@@ -226,7 +231,7 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
     <script src="Js/chat.js"></script>
     <script src="Js/busqueda_simple.js"></script>
     <script src="Js/buscar_avanzado.js"></script>
-    <script src="Js/add_carrito.js"></script>
+    <script src="Js/mostrar_carrito.js"></script>
 </body>
 <!-- Terminos y Condiciones -->
 <div class="terminos-y-condiciones">
