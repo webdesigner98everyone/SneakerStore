@@ -17,12 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Producto no encontrado.");
     }
 
+    // Asegúrate de incluir la columna 'stock' en la consulta SQL
     $nuevo_stock = $producto['stock'] - $cantidad;
     $update_sql = "UPDATE productos SET stock = ? WHERE id_producto = ?";
     $update_stmt = $conn->prepare($update_sql);
     $update_stmt->bind_param("ii", $nuevo_stock, $id_producto);
     $update_stmt->execute();
 
+    // Devuelve el nuevo stock como respuesta al cliente
     echo $nuevo_stock;
 }
+
 ?>

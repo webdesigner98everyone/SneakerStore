@@ -49,7 +49,8 @@ botonesAgregarCarrito.forEach(boton => {
                         id: productoId,
                         nombre: boton.parentNode.querySelector('h1').textContent,
                         precio: precioProducto,
-                        cantidad: 1
+                        cantidad: 1,
+                        stock: parseInt(nuevoStock) // Asegúrate de convertir el stock a entero
                     };
                 }
 
