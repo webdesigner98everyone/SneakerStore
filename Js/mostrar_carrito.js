@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="cantidad">${producto.cantidad}</span>
                     <button class="btn-cantidad" data-id="${producto.id}" data-operacion="sumar">+</button>
                 </td>
+                <td>${producto.talla}</td> <!-- Mostrar la talla -->
                 <td>$${precio.toFixed(3)}</td>
                 <td>$${subtotal.toFixed(3)}</td>
             `;

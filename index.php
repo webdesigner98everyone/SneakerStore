@@ -84,8 +84,9 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Cantidad</th>
-                        <th>Precio</th>
+                        <th>Cant.</th>
+                        <th>Talla</th>
+                        <th>Val.Unit</th>
                         <th>Total</th>
                     </tr>
                 </thead>

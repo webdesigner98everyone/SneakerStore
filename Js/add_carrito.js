@@ -16,6 +16,10 @@ botonesAgregarCarrito.forEach(boton => {
         const productoId = boton.getAttribute('data-producto-id');
         const cantidad = parseInt(boton.getAttribute('data-cantidad'));
 
+         // Obtener la talla seleccionada por el usuario
+         const selectTalla = boton.parentNode.querySelector('#talla');
+         const tallaSeleccionada = selectTalla.value;
+
         // Utilizar expresión regular para extraer el número del texto del precio
         const precioTexto = boton.parentNode.querySelector('.precio').textContent;
         const precioMatch = precioTexto.match(/(\d+(\.\d+)?)/);
@@ -50,7 +54,9 @@ botonesAgregarCarrito.forEach(boton => {
                         nombre: boton.parentNode.querySelector('h1').textContent,
                         precio: precioProducto,
                         cantidad: 1,
-                        stock: parseInt(nuevoStock) // Asegúrate de convertir el stock a entero
+                        stock: parseInt(nuevoStock), // Asegúrate de convertir el stock a entero
+                        talla: tallaSeleccionada  // Agregar la talla seleccionada al objeto del producto
+
                     };
                 }
 
@@ -62,6 +68,7 @@ botonesAgregarCarrito.forEach(boton => {
                 actualizarContadorCarrito();
                 sessionStorage.setItem('carrito', JSON.stringify(carrito));
 
+                // Almacenamiento a Tabla Carrito
                 const xhrCarrito = new XMLHttpRequest();
                 xhrCarrito.open('POST', '../Modulos/info_producto.php', true);
                 xhrCarrito.setRequestHeader('Content-Type', 'application/json');
@@ -82,7 +89,9 @@ botonesAgregarCarrito.forEach(boton => {
                     id_producto: productoId,
                     cantidad: cantidad,
                     precio: precioProducto,
-                    id_usuario: idUsuario // Aquí se usa idUsuario definido previamente
+                    id_usuario: idUsuario, // Aquí se usa idUsuario definido previamente
+                    talla: tallaSeleccionada  // También enviar la talla al servidor
+
                 };
                 xhrCarrito.send(JSON.stringify(data));
             }
