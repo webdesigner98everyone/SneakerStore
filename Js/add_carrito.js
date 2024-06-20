@@ -16,9 +16,9 @@ botonesAgregarCarrito.forEach(boton => {
         const productoId = boton.getAttribute('data-producto-id');
         const cantidad = parseInt(boton.getAttribute('data-cantidad'));
 
-         // Obtener la talla seleccionada por el usuario
-         const selectTalla = boton.parentNode.querySelector('#talla');
-         const tallaSeleccionada = selectTalla.value;
+        // Obtener la talla seleccionada por el usuario
+        const selectTalla = boton.parentNode.querySelector('#talla');
+        const tallaSeleccionada = selectTalla.value;
 
         // Utilizar expresión regular para extraer el número del texto del precio
         const precioTexto = boton.parentNode.querySelector('.precio').textContent;

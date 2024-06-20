@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (carrito.hasOwnProperty(idProducto)) {
             const producto = carrito[idProducto];
             console.log(producto); // Agrega este console.log para depurar
-            
+
             // Verifica si producto y producto.stock están definidos correctamente
             if (producto && typeof producto.stock !== 'undefined') {
                 if (operacion === 'sumar') {
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         delete carrito[idProducto];
                     }
                 }
-    
+
                 sessionStorage.setItem('carrito', JSON.stringify(carrito));
                 mostrarCarrito();
                 actualizarContadorCarrito();
@@ -98,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`El producto con ID ${idProducto} no está en el carrito.`);
         }
     }
-    
-    
+
+
 
     function actualizarContadorCarrito() {
         const contadorCarrito = document.getElementById('contador-carrito');

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_producto = $data['id_producto'];
     $cantidad = $data['cantidad'];
     $precio = $data['precio'];
-    
+
     // Verificar si id_usuario no es null
     if ($id_usuario === null) {
         echo json_encode(["status" => "error", "message" => "ID de usuario no encontrado en la sesión."]);
@@ -349,26 +349,26 @@ if (isset($_GET['id_producto'])) {
             const precio = <?php echo $producto['precio']; ?>;
 
             fetch('../Js/add_carrito.js', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    id_producto: idProducto,
-                    cantidad: cantidad,
-                    precio: precio,
-                    id_usuario: idUsuario // Enviar id_usuario en la solicitud
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id_producto: idProducto,
+                        cantidad: cantidad,
+                        precio: precio,
+                        id_usuario: idUsuario // Enviar id_usuario en la solicitud
+                    })
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('Producto añadido al carrito');
-                } else {
-                    alert('Error al añadir el producto al carrito');
-                }
-            })
-            .catch(error => console.error('Error:', error));
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Producto añadido al carrito');
+                    } else {
+                        alert('Error al añadir el producto al carrito');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         });
     </script>
     <script src="../Js/add_carrito.js"></script>
