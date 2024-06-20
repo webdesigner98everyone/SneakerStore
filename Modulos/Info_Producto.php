@@ -51,8 +51,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-echo json_encode(["status" => "error", "message" => "Acción no válida."]);
-
 if (isset($_GET['id_producto'])) {
     $id_producto = $_GET['id_producto'];
 
