@@ -2,6 +2,57 @@
 session_start();
 require_once 'In/db_connection.php'; // Asegúrate de que la ruta sea correcta
 
+// Verificar si el usuario ha iniciado sesión
+if (!isset($_SESSION['loggedin']) || !$_SESSION['loggedin']) {
+    // Mostrar una alerta simple y detener el script
+    echo '<script>alert("Debes iniciar sesión para añadir productos al carrito."); window.location.href = "../index.php";</script>';
+    exit();
+}
+
+$id_usuario = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $id_producto = $data['id_producto'];
+    $cantidad = $data['cantidad'];
+    $precio = $data['precio'];
+    
+    // Verificar si id_usuario no es null
+    if ($id_usuario === null) {
+        echo json_encode(["status" => "error", "message" => "ID de usuario no encontrado en la sesión."]);
+        exit();
+    }
+
+    // Verificar si el producto ya está en el carrito del usuario
+    $sql = "SELECT * FROM carrito WHERE id_usuario = ? AND id_producto = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $id_usuario, $id_producto);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        // Si el producto ya está en el carrito, actualizar la cantidad
+        $sql = "UPDATE carrito SET cantidad = cantidad + ? WHERE id_usuario = ? AND id_producto = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iii", $cantidad, $id_usuario, $id_producto);
+    } else {
+        // Si el producto no está en el carrito, insertarlo
+        $sql = "INSERT INTO carrito (id_usuario, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iiid", $id_usuario, $id_producto, $cantidad, $precio);
+    }
+
+    if ($stmt->execute()) {
+        echo json_encode(["status" => "success", "message" => "Producto añadido al carrito."]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "Error al añadir el producto al carrito."]);
+    }
+
+    exit();
+}
+
+echo json_encode(["status" => "error", "message" => "Acción no válida."]);
+
 if (isset($_GET['id_producto'])) {
     $id_producto = $_GET['id_producto'];
 
@@ -292,7 +343,38 @@ if (isset($_GET['id_producto'])) {
     <div class="boton-volver">
         <button onclick="window.location.href='../index.php'">Volver</button>
     </div>
+    <script>
+        const idUsuario = "<?php echo $id_usuario; ?>"; // Inyectar id_usuario en JavaScript
+        document.querySelector('.boton-anadir-carrito').addEventListener('click', function() {
+            const idProducto = this.getAttribute('data-producto-id');
+            const cantidad = this.getAttribute('data-cantidad');
+            const precio = <?php echo $producto['precio']; ?>;
+
+            fetch('../Js/add_carrito.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id_producto: idProducto,
+                    cantidad: cantidad,
+                    precio: precio,
+                    id_usuario: idUsuario // Enviar id_usuario en la solicitud
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Producto añadido al carrito');
+                } else {
+                    alert('Error al añadir el producto al carrito');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
     <script src="../Js/add_carrito.js"></script>
+    <script src="../Js/bd_carrito.js"></script>
 </body>
 
 </html>

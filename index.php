@@ -231,6 +231,7 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
     <script src="Js/busqueda_simple.js"></script>
     <script src="Js/buscar_avanzado.js"></script>
     <script src="Js/mostrar_carrito.js"></script>
+
 </body>
 <!-- Terminos y Condiciones -->
 <div class="terminos-y-condiciones">

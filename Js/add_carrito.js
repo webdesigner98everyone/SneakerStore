@@ -56,14 +56,41 @@ botonesAgregarCarrito.forEach(boton => {
 
                 console.log('Producto añadido al carrito:', carrito[productoId]); // Depuración
 
+                // Mostrar la alerta
+                alert(`Producto añadido al carrito: ${carrito[productoId].nombre}`);
                 // Actualizar el contador del carrito, guardar el carrito en la sesión y actualizar la tabla del carrito
                 actualizarContadorCarrito();
                 sessionStorage.setItem('carrito', JSON.stringify(carrito));
+
+                const xhrCarrito = new XMLHttpRequest();
+                xhrCarrito.open('POST', '../Modulos/info_producto.php', true);
+                xhrCarrito.setRequestHeader('Content-Type', 'application/json');
+                xhrCarrito.onreadystatechange = function () {
+                    if (xhrCarrito.readyState === 4) {
+                        if (xhrCarrito.status === 200) {
+                            const response = JSON.parse(xhrCarrito.responseText);
+                            if (response.status !== 'success') {
+                                alert(`Error: ${response.message}`);
+                            }
+                        } else {
+                            console.error('Error en la solicitud AJAX:', xhrCarrito.status);
+                        }
+                    }
+                };
+
+                const data = {
+                    id_producto: productoId,
+                    cantidad: cantidad,
+                    precio: precioProducto,
+                    id_usuario: idUsuario // Aquí se usa idUsuario definido previamente
+                };
+                xhrCarrito.send(JSON.stringify(data));
             }
         };
         xhr.send('producto_id=' + encodeURIComponent(productoId) + '&cantidad=' + encodeURIComponent(cantidad));
     });
 });
+
 
 // Función para actualizar el contador del carrito
 function actualizarContadorCarrito() {

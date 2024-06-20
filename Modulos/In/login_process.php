@@ -19,7 +19,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Credenciales correctas, redirigir a la página de bienvenida
             $_SESSION['loggedin'] = true;
             $_SESSION['usuario'] = $usuario;
-            header("Location: ../Bienvenido.html");
+            $_SESSION['id_usuario'] = $row['id_usuario']; // Almacenar el ID del usuario en la sesión
+
+            // Redirigir a la página previa después de iniciar sesión
+            if (isset($_SESSION['redirect_to'])) {
+                $redirect_to = $_SESSION['redirect_to'];
+                unset($_SESSION['redirect_to']);
+                header("Location: $redirect_to");
+            } else {
+                header("Location: ../Bienvenido.html");
+            }
             exit();
         } else {
             // Contraseña incorrecta, redirigir a la página de error de usuario
