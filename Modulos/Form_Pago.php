@@ -98,6 +98,68 @@
             width: 100%;
             text-align: center;
         }
+
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: var(--blanco);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid var(--gris);
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            color: var(--negro);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: var(--primario);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal h2 {
+            margin: 0;
+            color: var(--primarioOscuro);
+        }
+
+        .modal p {
+            margin: 10px 0;
+        }
+
+        .modal button {
+            background-color: var(--primarioOscuro);
+            color: var(--blanco);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .modal button:hover {
+            background-color: var(--primario);
+        }
     </style>
 </head>
 <body>
@@ -148,6 +210,16 @@
         <button id="btn-facturacion" class="btn-facturacion">Generar Facturación</button>
     </div>
 
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Pago Procesado</h2>
+            <p>El pago se ha procesado exitosamente.</p>
+            <button id="close-modal">Aceptar</button>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Realizar una solicitud AJAX para obtener los datos del perfil del usuario
@@ -183,7 +255,7 @@
 
             // Simular un procesamiento de pago y mostrar el botón de generar facturación
             setTimeout(() => {
-                alert('Pago procesado exitosamente');
+                showModal();
                 document.getElementById('btn-facturacion').style.display = 'block';
             }, 1000);
         });
@@ -193,6 +265,28 @@
             alert('Generando la facturación');
             // Aquí podrías redirigir a una página de facturación o realizar otra acción
         });
+
+        function showModal() {
+            const modal = document.getElementById('myModal');
+            const span = document.getElementsByClassName('close')[0];
+            const closeModalButton = document.getElementById('close-modal');
+
+            modal.style.display = 'block';
+
+            span.onclick = function() {
+                modal.style.display = 'none';
+            }
+
+            closeModalButton.onclick = function() {
+                modal.style.display = 'none';
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+        }
     </script>
 </body>
 </html>
