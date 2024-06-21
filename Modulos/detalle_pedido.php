@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +21,7 @@
         body {
             font-family: var(--fuente);
             line-height: 1.6;
-            background-color: var(--blanco);
+            background-color: var(--primario);
             color: var(--negro);
             margin: 0;
             padding: 0;
@@ -48,7 +49,8 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid var(--gris);
@@ -87,10 +89,24 @@
         .boton-pagar:hover {
             background-color: var(--secundarioOscuro);
         }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 200px;
+            height: auto;
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
+        <div class="logo">
+            <img src="../img/Logo/Marca.png" alt="Logo de la Tienda">
+        </div>
         <h1>Detalle del Pedido</h1>
         <table>
             <thead>
@@ -148,28 +164,29 @@
                 };
 
                 fetch('In/guardar_detalle_pedido.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(result => {
-                    if (result.status === 'success') {
-                        alert('Pedido guardado correctamente');
-                        // Redirigir a la página de pago si es necesario
-                        // window.location.href = 'pagina-de-pago.html';
-                    } else {
-                        alert('Error al guardar el pedido: ' + result.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error al procesar la solicitud.');
-                });
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.status === 'success') {
+                            alert('Pedido guardado correctamente');
+                            // Redirigir a la página de pago si es necesario
+                            window.location.href = 'Form_Pago.php';
+                        } else {
+                            alert('Error al guardar el pedido: ' + result.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al procesar la solicitud.');
+                    });
             });
         });
     </script>
 </body>
+
 </html>
