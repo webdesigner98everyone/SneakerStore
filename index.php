@@ -97,6 +97,7 @@ $total_productos_carrito = array_reduce($carrito, function ($total, $producto) {
             <div class="total">
                 <strong>Total a pagar: $<span id="total-pagar"></span></strong>
             </div>
+            <button id="boton-detalle" class="boton-detalle">Detalle del pedido</button>
         </div>
     </div>
 

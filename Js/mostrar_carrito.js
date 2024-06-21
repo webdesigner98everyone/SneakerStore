@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const carritoLink = document.getElementById('carrito-link');
     const modal = document.getElementById('carrito-modal');
+    const botonDatelle = modal.querySelector('#boton-detalle');
     const cerrarModal = document.querySelector('.cerrar');
     const tablaCarrito = document.getElementById('tabla-carrito').getElementsByTagName('tbody')[0];
     const totalPagar = document.getElementById('total-pagar');
@@ -21,6 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target === modal) {
             modal.style.display = 'none';
         }
+    });
+
+    botonDatelle.addEventListener('click', () => {
+        // Aquí puedes redirigir al usuario a la página de pago
+        window.location.href = 'Modulos/detalle_pedido.php'; // Reemplaza con tu URL de pago
     });
 
     function mostrarCarrito() {
