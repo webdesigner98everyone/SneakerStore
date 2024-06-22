@@ -217,6 +217,25 @@
             color: #9C27B0;
             text-decoration: none;
         }
+
+        .btn-volver {
+            display: none;
+            margin-top: 20px;
+            background-color: var(--secundario);
+            color: var(--negro);
+            border: none;
+            padding: 12px 24px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-volver:hover {
+            background-color: var(--secundarioOscuro);
+        }
     </style>
 </head>
 
@@ -266,6 +285,7 @@
             </div>
         </form>
         <button id="btn-facturacion" class="btn-facturacion">Generar Facturación</button>
+        <button id="btn-volver" class="btn-volver">Volver</button>
     </div>
 
     <!-- Modal -->
@@ -411,19 +431,27 @@
             const span = modalContent.getElementsByClassName('close')[0];
             span.onclick = function() {
                 modal.style.display = 'none';
+                document.getElementById('btn-volver').style.display = 'block'; // Mostrar botón "Volver" al cerrar el modal
             };
 
             const closeModalButton = document.getElementById('close-modal-fact');
             closeModalButton.onclick = function() {
                 modal.style.display = 'none';
+                document.getElementById('btn-volver').style.display = 'block'; // Mostrar botón "Volver" al cerrar el modal
             };
 
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = 'none';
+                    document.getElementById('btn-volver').style.display = 'block'; // Mostrar botón "Volver" al cerrar el modal
                 }
+
             };
         }
+        // Asignar evento al botón "Volver"
+        document.getElementById('btn-volver').addEventListener('click', function() {
+            window.location.href = '../index.php'; // Redirigir a la página de inicio
+        });
 
         function showModal() {
             const modal = document.getElementById('myModal');
